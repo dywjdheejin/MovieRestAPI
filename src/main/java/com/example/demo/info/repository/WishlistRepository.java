@@ -54,7 +54,7 @@ public class WishlistRepository {
 		//wishlist.setNum(keyHolder.getKey().intValue());
 		return wishlist;
 	}
-	
+	 
 	public Integer deleteByNum(int num) {
 		SqlParameterSource parameterSource = new MapSqlParameterSource("num", num); 
 		return namedParameterJdbcTemplate.update(WishlistSql.DELETE + WishlistSql.NUM_CONDITION, parameterSource);
