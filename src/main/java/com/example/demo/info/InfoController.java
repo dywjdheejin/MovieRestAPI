@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("user")
+@RequestMapping("userinfo")
 public class InfoController {
 	
 	private InfoService service;
@@ -38,14 +38,14 @@ public class InfoController {
 		return project;
 	}
 	
-	@GetMapping("userList")
+	@GetMapping("list")
 	public Object userList() {
 		log.debug("/userList start");
 		List<Userinfo> cityList = service.getUserinfoList();
 		return cityList;
 	}
 	
-	@PostMapping(value="userAdd")
+	@PostMapping(value="Add")
 	public ResponseEntity<Userinfo> userAdd(@RequestBody Userinfo userinfo) {
 		try {
 			log.debug("userinfo = {}", userinfo.toString());
@@ -56,7 +56,7 @@ public class InfoController {
 		}
 	} 
 	
-	@PostMapping(value="userEdit")
+	@PostMapping(value="Edit")
 	public ResponseEntity<String> userEdit(@RequestBody Userinfo userinfo) {
 		try {
 			log.debug("userinfo = {}", userinfo.toString());
@@ -69,7 +69,7 @@ public class InfoController {
 	}
 	
 	
-	@GetMapping(value="userDelete")
+	@GetMapping(value="Delete")
 	public ResponseEntity<String> userDelete(@RequestParam(value="id") String id) {
 		try {
 			log.debug("userinfo id = {}", id);
