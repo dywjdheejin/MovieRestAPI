@@ -12,4 +12,4 @@ class MovielistSql {
 	public static final String GENRE_CONDITION = """
 		AND genre = :genre
 	""";
-}
+} 
