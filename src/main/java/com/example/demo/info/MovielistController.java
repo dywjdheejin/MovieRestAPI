@@ -23,7 +23,7 @@ public class MovielistController {
 		this.service = service;
 	}
 	
-	@GetMapping("list")
+	@GetMapping("List")
 	public Object Movielist() {
 		log.debug("/Movielist start");
 		List<Movielist> movielist = service.getMovielist();

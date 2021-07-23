@@ -28,7 +28,7 @@ public class WishlistController {
 		this.service = service;
 	}
 	
-	@GetMapping("list")
+	@GetMapping("List")
 	public Object WishList() {
 		log.debug("/WishList start");
 		List<Wishlist> wishlist = service.getWishList();

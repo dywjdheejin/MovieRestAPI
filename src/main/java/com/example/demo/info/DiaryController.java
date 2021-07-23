@@ -10,39 +10,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.demo.info.model.Diary;
 import com.example.demo.info.model.Userinfo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("userinfo")
-public class InfoController {
+@RequestMapping("diary")
+public class DiaryController {
 	
-	private InfoService service;
+	private DiaryService service;
 	
 	@Autowired
-	public InfoController(InfoService service) {
+	public DiaryController(DiaryService service) {
 		this.service = service;
 	}
 	
-	
 	@GetMapping("List")
-	public Object userList() {
-		log.debug("/userList start");
-		List<Userinfo> cityList = service.getUserinfoList();
-		return cityList;
+	public Object diaryList() {
+		log.debug("/diaryList start");
+		List<Diary> diaryList = service.getDiaryList();
+		return diaryList;
 	}
 	
 	@PostMapping(value="Add")
-	public ResponseEntity<Userinfo> userAdd(@RequestBody Userinfo userinfo) {
+	public ResponseEntity<Diary> diaryAdd(@RequestBody Diary diary) {
 		try {
-			log.debug("userinfo = {}", userinfo.toString());
-			return new ResponseEntity<>(service.insert(userinfo), HttpStatus.OK);
+			log.debug("diary = {}", diary.toString());
+			return new ResponseEntity<>(service.insert(diary), HttpStatus.OK);
 		}catch (Exception e) {
 			log.error(e.toString());
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,10 +48,10 @@ public class InfoController {
 	} 
 	
 	@PostMapping(value="Edit")
-	public ResponseEntity<String> userEdit(@RequestBody Userinfo userinfo) {
+	public ResponseEntity<String> diaryEdit(@RequestBody Diary diary) {
 		try {
-			log.debug("userinfo = {}", userinfo.toString());
-			Integer updatedCnt = service.updateById(userinfo);
+			log.debug("diary = {}", diary.toString());
+			Integer updatedCnt = service.update(diary);
 			return new ResponseEntity<>(String.format("%d updated", updatedCnt), HttpStatus.OK);
 		}catch (Exception e) {
 			log.error(e.toString());
@@ -61,12 +59,11 @@ public class InfoController {
 		}
 	}
 	
-	
 	@GetMapping(value="Delete")
-	public ResponseEntity<String> userDelete(@RequestParam(value="id") String id) {
+	public ResponseEntity<String> userDelete(@RequestParam(value="id") String id, @RequestParam(value="num") int num) {
 		try {
-			log.debug("userinfo id = {}", id);
-			Integer deletedCnt = service.deleteById(id);
+			log.debug("diary id = {}, num = {}", id,num);
+			Integer deletedCnt = service.delete(id,num);
 			return new ResponseEntity<>(String.format("%d deleted", deletedCnt), HttpStatus.OK);
 		}catch (Exception e) {
 			log.error(e.toString());

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.info.model.Project;
 import com.example.demo.info.model.Userinfo;
 import com.example.demo.info.repository.UserinfoRepository;
 
@@ -20,15 +19,6 @@ public class InfoService {
 	@Autowired
 	public InfoService(UserinfoRepository userinfoRepository) {
 		this.userinfoRepository = userinfoRepository;
-	}
-	
-	public Project getProjectInfo() {
-		Project project = new Project();
-		project.id = "test";
-		project.pw = "1234";
-		project.name = "ȫ�浿";
-		
-		return project;
 	}
 	
 	public List<Userinfo> getUserinfoList() {
